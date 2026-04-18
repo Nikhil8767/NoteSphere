@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +28,7 @@ import lombok.Setter;
 public class JournalEntity {
 
     @Id
-    
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     private String name;
@@ -34,5 +36,6 @@ public class JournalEntity {
 
     @ManyToOne
 @JoinColumn(name = "user_id")
+@JsonBackReference
 private UserEntity user;
 }
