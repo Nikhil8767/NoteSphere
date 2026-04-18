@@ -26,4 +26,9 @@ public class UserServices {
         
     }
 
+    public ResponseEntity<String>addUser(UserEntity user){
+        urs.save(user);
+        return new ResponseEntity<>("users added successfully",HttpStatus.CREATED);
+    }
+
 }
