@@ -25,6 +25,12 @@ public class JournalEntityService {
     private UserRepository urs;
 
 
+    public ResponseEntity<List<JournalEntity>>getAllJournal(){
+
+        return new ResponseEntity<>(jrs.findAll(),HttpStatus.FOUND);
+    }
+    
+
     public List<JournalEntity>getAllJournalOfUsers(String Username){
         UserEntity user=urs.findByUsername(Username);
 

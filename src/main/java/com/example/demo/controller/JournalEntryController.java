@@ -25,6 +25,11 @@ public class JournalEntryController {
     private JournalEntityService jrs;
 
 
+    @GetMapping("/getAllJournal")
+    public ResponseEntity<List<JournalEntity>>getAll(){
+        return jrs.getAllJournal();
+    }
+
     @GetMapping("/getJournal/{username}")
     public List<JournalEntity>getJournal(String username){
         return jrs.getAllJournalOfUsers(username);
