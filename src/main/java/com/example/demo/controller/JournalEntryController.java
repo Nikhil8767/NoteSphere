@@ -24,6 +24,8 @@ public class JournalEntryController {
     @Autowired
     private JournalEntityService jrs;
 
+    // delete function is remaining **************************************************************
+    // when we delete this it should also get deleted from user or user delete that then it should be deleted 
 
     @GetMapping("/getAllJournal")
     public ResponseEntity<List<JournalEntity>>getAll(){
@@ -39,6 +41,8 @@ public class JournalEntryController {
     public ResponseEntity<JournalEntity>getByid(@PathVariable String id){
        return jrs.getByid(id);
     }
+
+     
 
    
 
