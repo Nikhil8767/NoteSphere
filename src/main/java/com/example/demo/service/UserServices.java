@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.entity.JournalEntity;
 import com.example.demo.entity.UserEntity;
@@ -38,6 +39,8 @@ public class UserServices {
             return new ResponseEntity<>("users added successfully",HttpStatus.CREATED);
         }
 
+        
+       @Transactional
         public ResponseEntity<String>delete(String id,int userId){
             Optional<UserEntity>u=urs.findById(userId);
              Optional<JournalEntity>j=jrs.findById(id);
