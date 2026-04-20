@@ -69,6 +69,10 @@ public class UserServices {
 
         }
 
+        public UserEntity findByUserName(String username){
+            return urs.findByUsername(username);
+        }
+
 
         public ResponseEntity<String>update(UserEntity user){
 
