@@ -81,7 +81,7 @@ public class UserServices {
             UserEntity userInDb=urs.findByUsername(username);
 
             userInDb.setUsername(user.getUsername());
-            userInDb.setPassword(user.getPassword());
+            // userInDb.setPassword(user.getPassword());
             // urs.save(userInDb);
             // we are not saving it directly ... instead of that we are converting the password to hash form
              userInDb.setPassword(passwordencoder.encode(user.getPassword()));
