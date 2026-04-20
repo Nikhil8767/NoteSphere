@@ -35,6 +35,9 @@ public class UserEntity {
     @NonNull
     private String password;
 
+    @NonNull
+    private String role;
+
    
    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
    @JsonManagedReference
