@@ -1,11 +1,16 @@
 package com.example.demo.service;
 
+import java.net.Authenticator;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +26,8 @@ public class UserServices {
     @Autowired
     private UserRepository urs;
 
+    private static final PasswordEncoder passwordencoder=new BCryptPasswordEncoder();
+
     @Autowired JournalEntityRepository jrs;
 
      public ResponseEntity<List<UserEntity>>getAll(){
@@ -33,6 +40,7 @@ public class UserServices {
     }
 
         public ResponseEntity<String>addUser(UserEntity user){
+            user.setPassword(passwordencoder.encode(user.getPassword()));
          
             
             urs.save(user);
@@ -58,6 +66,23 @@ public class UserServices {
             jrs.delete(journal);
 
             return new ResponseEntity<>("deleted succesfully",HttpStatus.OK);
+
+        }
+
+
+        public ResponseEntity<String>update(UserEntity user){
+
+            Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
+            String username=authentication.getName();
+            UserEntity userInDb=urs.findByUsername(username);
+
+            userInDb.setUsername(user.getUsername());
+            userInDb.setPassword(user.getPassword());
+            // urs.save(userInDb);
+            // we are not saving it directly ... instead of that we are converting the password to hash form
+             userInDb.setPassword(passwordencoder.encode(user.getPassword()));
+            urs.save(userInDb);
+            return new ResponseEntity<>("updated successfullty",HttpStatus.NO_CONTENT);
 
         }
 
