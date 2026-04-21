@@ -14,10 +14,12 @@ public class SpringSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.csrf(csrf->csrf.disable())
-            .authorizeHttpRequests(auth->auth.requestMatchers("/**").permitAll()
-                                            // .requestMatchers("/user").authenticated()
+            .authorizeHttpRequests(auth->auth.requestMatchers("/public/**").permitAll()
+                                            .requestMatchers("/user/**").authenticated()
+                                            .requestMatchers("/journal/**").authenticated()
                                             // .anyRequest().authenticated()
-                                    ).formLogin(form->form.defaultSuccessUrl("/journal",true));
+                                    ).formLogin(form->form.disable());
+                                    
                                     
                                     return http.build();
     }

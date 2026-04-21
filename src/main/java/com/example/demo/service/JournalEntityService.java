@@ -29,6 +29,10 @@ public class JournalEntityService {
 
         return new ResponseEntity<>(jrs.findAll(),HttpStatus.FOUND);
     }
+
+    public Optional<JournalEntity>findById(String id){
+        return jrs.findById(id);
+    }
     
 
     public List<JournalEntity>getAllJournalOfUsers(String Username){

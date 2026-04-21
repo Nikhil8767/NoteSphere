@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.UserEntity;
 import com.example.demo.service.UserServices;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired UserServices urs;
@@ -26,10 +28,7 @@ public class UserController {
         return urs.getAll();
     }
 
-    @PostMapping("/addUser")
-    public ResponseEntity<String>Add(@RequestBody UserEntity user){
-        return urs.addUser(user);
-    }
+   
 
     @PutMapping("/updateUser")
     public ResponseEntity<String>update(@RequestBody UserEntity user){
