@@ -26,7 +26,9 @@ public class UserServices {
     @Autowired
     private UserRepository urs;
 
-    private static final PasswordEncoder passwordencoder=new BCryptPasswordEncoder();
+    // private static final PasswordEncoder passwordencoder=new BCryptPasswordEncoder();/
+    @Autowired
+private PasswordEncoder passwordEncoder;
 
     @Autowired JournalEntityRepository jrs;
 
@@ -40,7 +42,7 @@ public class UserServices {
     }
 
         public ResponseEntity<String>addUser(UserEntity user){
-            user.setPassword(passwordencoder.encode(user.getPassword()));
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
          
             
             urs.save(user);
@@ -69,7 +71,7 @@ public class UserServices {
 
         }
 
-        public UserEntity findByUserName(String username){
+        public UserEntity findByUsername(String username){
             return urs.findByUsername(username);
         }
 
@@ -80,11 +82,11 @@ public class UserServices {
             String username=authentication.getName();
             UserEntity userInDb=urs.findByUsername(username);
 
-            userInDb.setUsername(user.getUsername());
+            // userInDb.setUsername(user.getUsername());
             // userInDb.setPassword(user.getPassword());
             // urs.save(userInDb);
             // we are not saving it directly ... instead of that we are converting the password to hash form
-             userInDb.setPassword(passwordencoder.encode(user.getPassword()));
+             userInDb.setPassword(passwordEncoder.encode(user.getPassword()));
             urs.save(userInDb);
             return new ResponseEntity<>("updated successfullty",HttpStatus.NO_CONTENT);
 

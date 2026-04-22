@@ -52,7 +52,7 @@ public class JournalEntryController {
     public ResponseEntity<JournalEntity>getByid(@PathVariable String id){
         Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
         String userName=authentication.getName();
-        UserEntity user=urs.findByUserName(userName);
+        UserEntity user=urs.findByUsername(userName);
         List<JournalEntity>collect=user.getJournalEntries().stream().filter(x->x.getId().equals(id)).collect(Collectors.toList());
         if(collect.isEmpty()){
             Optional<JournalEntity>journal=jrs.findById(id);
