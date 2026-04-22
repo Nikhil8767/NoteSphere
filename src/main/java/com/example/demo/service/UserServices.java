@@ -82,13 +82,13 @@ private PasswordEncoder passwordEncoder;
             String username=authentication.getName();
             UserEntity userInDb=urs.findByUsername(username);
 
-            // userInDb.setUsername(user.getUsername());
+            userInDb.setUsername(user.getUsername());
             // userInDb.setPassword(user.getPassword());
             // urs.save(userInDb);
             // we are not saving it directly ... instead of that we are converting the password to hash form
              userInDb.setPassword(passwordEncoder.encode(user.getPassword()));
             urs.save(userInDb);
-            return new ResponseEntity<>("updated successfullty",HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>("updated successfullty",HttpStatus.OK);
 
         }
 
