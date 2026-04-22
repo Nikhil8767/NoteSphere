@@ -59,8 +59,24 @@ public class JournalEntityService {
 
 
    
-
-    public ResponseEntity<String> add(JournalEntity j,String username){
+// *********************************************************
+    // public ResponseEntity<String> add(JournalEntity j,String username){
+    //     j.setDate(LocalDate.now());
+    //     UserEntity user=urs.findByUsername(username);
+    //     if(user==null){
+    //         return new ResponseEntity<>("user not found",HttpStatus.NOT_FOUND);
+    //     }
+    //     else{
+    //         j.setUser(user);
+    //         JournalEntity saved=jrs.save(j);
+    //          user.getJournalEntries().add(saved);
+    //         return new ResponseEntity<>("added to userprofile and journal",HttpStatus.CREATED);
+    //     }
+    // }
+// ====================================after auth=============
+    public ResponseEntity<String> add(JournalEntity j){
+        Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
+        String username=authentication.getName();
         j.setDate(LocalDate.now());
         UserEntity user=urs.findByUsername(username);
         if(user==null){
@@ -73,6 +89,7 @@ public class JournalEntityService {
             return new ResponseEntity<>("added to userprofile and journal",HttpStatus.CREATED);
         }
     }
+// *******************************************
 
 
 

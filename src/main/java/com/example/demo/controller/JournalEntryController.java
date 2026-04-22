@@ -35,9 +35,6 @@ public class JournalEntryController {
     @Autowired
     private UserServices urs;
 
-    // delete function is remaining **************************************************************
-    // when we delete this it should also get deleted from user or user delete that then it should be deleted 
-
     @GetMapping("/getAllJournal")
     public ResponseEntity<List<JournalEntity>>getAll(){
         return jrs.getAllJournal();
@@ -52,7 +49,7 @@ public class JournalEntryController {
     public List<JournalEntity>getJournal(){
         return jrs.getAllJournalOfUsers();
     }
-    // **************************************************************
+// **************************************************************
 
     @GetMapping("/getById/{id}")
     public ResponseEntity<JournalEntity>getByid(@PathVariable String id){
@@ -72,11 +69,19 @@ public class JournalEntryController {
      
 
    
+// ****************************************************
+    // @PostMapping("/add/{username}")
+    // public ResponseEntity<String> add(@PathVariable String username,@RequestBody JournalEntity j){  
+    //    return jrs.add(j,username);
+    // }
 
-    @PostMapping("/add/{username}")
-    public ResponseEntity<String> add(@PathVariable String username,@RequestBody JournalEntity j){  
-       return jrs.add(j,username);
+// =====================after auth=========================
+    @PostMapping("/add")
+    public ResponseEntity<String> add(@RequestBody JournalEntity j){  
+       return jrs.add(j);
     }
+
+// *****************************************
 
     
 

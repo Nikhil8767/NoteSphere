@@ -29,10 +29,10 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
 
-    @NonNull
-    
+   
+    @Column(unique = true, nullable = false) 
     private String username;
-    @NonNull
+    @Column(nullable = false)
     private String password;
 
     @NonNull

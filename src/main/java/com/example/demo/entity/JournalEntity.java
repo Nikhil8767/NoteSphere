@@ -33,12 +33,12 @@ public class JournalEntity {
     private String id;
 
     @NonNull
-    private String name;
+    private String title;
     @NonNull
     private String description;
     @NonNull
     private String Content;
-    
+
     private LocalDate date;
 
     @ManyToOne
