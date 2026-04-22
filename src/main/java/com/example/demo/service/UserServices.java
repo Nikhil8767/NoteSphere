@@ -75,6 +75,8 @@ private PasswordEncoder passwordEncoder;
             return urs.findByUsername(username);
         }
 
+        
+
 
         public ResponseEntity<String>update(UserEntity user){
 

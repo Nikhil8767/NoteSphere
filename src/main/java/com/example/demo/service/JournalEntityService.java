@@ -47,15 +47,18 @@ public class JournalEntityService {
         return user.getJournalEntries();
     }
 
+
     public ResponseEntity<JournalEntity>getByid(String id){
         Optional<JournalEntity>a=jrs.findById(id);
         if(a.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         else{
             return new ResponseEntity<JournalEntity>(a.get(),HttpStatus.FOUND);
         }
     }
+
+
 
 
    
@@ -84,8 +87,8 @@ public class JournalEntityService {
         }
         else{
             j.setUser(user);
-            JournalEntity saved=jrs.save(j);
-             user.getJournalEntries().add(saved);
+            jrs.save(j);
+           
             return new ResponseEntity<>("added to userprofile and journal",HttpStatus.CREATED);
         }
     }
@@ -95,6 +98,31 @@ public class JournalEntityService {
 
 
 
+
+public ResponseEntity<String>Update(String id,JournalEntity journal){
+Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
+String username=authentication.getName();
+UserEntity user=urs.findByUsername(username);
+Optional<JournalEntity>j=jrs.findById(id);
+if(j.isEmpty()){
+    return new ResponseEntity<>("journal not found",HttpStatus.NOT_FOUND);
+}
+
+   if( j.get().getUser().getUsername().equals(username)){
+    j.get().setTitle(journal.getTitle());
+    j.get().setContent(journal.getContent());
+    j.get().setTitle(journal.getTitle());
+    j.get().setDescription(journal.getDescription());
+    j.get().setDate(LocalDate.now());
+
+    jrs.save(j.get());
+
+    return new ResponseEntity<>("updated",HttpStatus.OK);
+    }
+    else{
+        return new ResponseEntity<>("failed",HttpStatus.BAD_REQUEST);
+    }
+}
 
 
 
