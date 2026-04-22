@@ -19,7 +19,8 @@ public class SpringSecurityConfig {
             .authorizeHttpRequests(auth->auth.requestMatchers("/public/**").permitAll()
                                             .requestMatchers("/user/**").authenticated()
                                             .requestMatchers("/journal/**").authenticated()
-                                            // .anyRequest().authenticated()
+                                            .requestMatchers("/admin").hasRole("ADMIN")
+                                            .anyRequest().authenticated()
                                     ).formLogin(form->form.disable()).httpBasic(basic->{});
                                     
                                     

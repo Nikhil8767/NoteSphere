@@ -75,6 +75,10 @@ private PasswordEncoder passwordEncoder;
             return urs.findByUsername(username);
         }
 
+        public List<UserEntity>getAllUser(){
+            return urs.findAll();
+        }
+
         
 
 
