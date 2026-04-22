@@ -18,7 +18,7 @@ public class SpringSecurityConfig {
                                             .requestMatchers("/user/**").authenticated()
                                             .requestMatchers("/journal/**").authenticated()
                                             // .anyRequest().authenticated()
-                                    ).formLogin(form->form.disable());
+                                    ).formLogin(form->form.disable()).httpBasic(basic->{});
                                     
                                     
                                     return http.build();
