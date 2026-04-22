@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.net.Authenticator;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,7 +77,7 @@ private PasswordEncoder passwordEncoder;
         }
 
         public List<UserEntity>getAllUser(){
-            return urs.findAll();
+            return urs.findByRole("USER");
         }
 
         
