@@ -17,6 +17,7 @@ import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 
 @Entity
@@ -31,7 +32,13 @@ public class JournalEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
+    @NonNull
     private String name;
+    @NonNull
+    private String description;
+    @NonNull
+    private String Content;
+    
     private LocalDate date;
 
     @ManyToOne

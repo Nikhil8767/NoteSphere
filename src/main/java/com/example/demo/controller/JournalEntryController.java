@@ -42,11 +42,17 @@ public class JournalEntryController {
     public ResponseEntity<List<JournalEntity>>getAll(){
         return jrs.getAllJournal();
     }
-
-    @GetMapping("/getJournal/{username}")
-    public List<JournalEntity>getJournal(String username){
-        return jrs.getAllJournalOfUsers(username);
+// *************************************************************************
+    // @GetMapping("/getJournal/{username}")
+    // public List<JournalEntity>getJournal(String username){
+    //     return jrs.getAllJournalOfUsers(username);
+    // }
+    // =========================after auth =======================
+     @GetMapping("/getJournal")
+    public List<JournalEntity>getJournal(){
+        return jrs.getAllJournalOfUsers();
     }
+    // **************************************************************
 
     @GetMapping("/getById/{id}")
     public ResponseEntity<JournalEntity>getByid(@PathVariable String id){

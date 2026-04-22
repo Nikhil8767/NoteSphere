@@ -8,6 +8,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.entity.JournalEntity;
@@ -34,9 +37,12 @@ public class JournalEntityService {
         return jrs.findById(id);
     }
     
+//  public List<JournalEntity>getAllJournalOfUsers(String Username)
+    public List<JournalEntity>getAllJournalOfUsers(){
+        Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
+        String username=authentication.getName();
 
-    public List<JournalEntity>getAllJournalOfUsers(String Username){
-        UserEntity user=urs.findByUsername(Username);
+        UserEntity user=urs.findByUsername(username);
 
         return user.getJournalEntries();
     }
