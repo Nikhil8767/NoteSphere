@@ -42,4 +42,24 @@ public class UserServiceTest {
         assertEquals("nikhill", u.getUsername());
     }
 
+
+
+    @Test
+    public void testAddUser(){
+
+        UserEntity user=new UserEntity();
+        user.setUsername("hello");
+        user.setPassword("1234");
+        user.setRole("USER");
+
+
+        urs.save(user);
+
+        UserEntity u=urs.findByUsername("hello");
+
+        assertNotNull(u);
+       assertNotNull(u.getPassword());
+
+    }
+
 }
