@@ -10,8 +10,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.example.demo.entity.UserEntity;
 import com.example.demo.repository.UserRepository;
 
+import jakarta.transaction.Transactional;
+
 
 @SpringBootTest
+@Transactional
 public class UserServiceTest {
 
     @Autowired 
@@ -24,23 +27,19 @@ public class UserServiceTest {
 
     @Test
     public void testFindByUser(){
-        try{
+       
         UserEntity user=new UserEntity();
-        user.setUsername("nikhil");
+        user.setUsername("nikhill");
         user.setPassword("1234");
         user.setRole("USER");
 
 
         urs.save(user);
 
-        UserEntity u=urs.findByUsername("nikhil");
+        UserEntity u=urs.findByUsername("nikhill");
 
         assertNotNull(u);
-        assertEquals("nikhil", u.getUsername());
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
+        assertEquals("nikhill", u.getUsername());
     }
 
 }
