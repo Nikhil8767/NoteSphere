@@ -9,18 +9,23 @@ import lombok.Setter;
 
 @Getter
 @Setter
-
 public class WeatherResponse {
-    private Current current;
+
+    private Main main;
+    private List<Weather> weather;
 
     @Getter
     @Setter
-    public class Current{
-        private int temperature;
+    public static class Main {
+        private double temp;
 
-        @JsonProperty("weather_description")
-        private List<String>weatherDescriptions;
-        private int feelslike;
+        @JsonProperty("feels_like")
+        private double feelsLike;
     }
 
+    @Getter
+    @Setter
+    public static class Weather {
+        private String description;
+    }
 }
