@@ -1,10 +1,12 @@
 package com.example.demo.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -45,5 +47,18 @@ void testGetAllJournal() {
 
     assertEquals(HttpStatus.FOUND, response.getStatusCode());
     assertEquals(1, response.getBody().size());
+}
+
+@Test
+void testFindById() {
+    JournalEntity journal = new JournalEntity();
+    journal.setId("1");
+
+    when(jrs.findById("1")).thenReturn(Optional.of(journal));
+
+    Optional<JournalEntity> result = service.findById("1");
+
+    assertTrue(result.isPresent());
+    assertEquals("1", result.get().getId());
 }
 }
