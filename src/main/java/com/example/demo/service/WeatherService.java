@@ -1,6 +1,7 @@
 package com.example.demo.service;
 import com.example.demo.apiResponse.WeatherResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -9,7 +10,8 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class WeatherService {
 
-    private static final String API_KEY = "478461f9212ffa143cdd733a949eab48";
+    @Value("{weather.api.key}")
+    private static  String API_KEY  ;
    private static final String API_URL =
     "https://api.openweathermap.org/data/2.5/weather?q={city}&appid={apikey}&units=metric";
 
